@@ -90,28 +90,40 @@ var finances = [
 
 
 var netChangeProfits = 0;
-var greatestProfit = ['date', 0];
+let greatestProfit;
 var greatestLoss = ['date', 0];
 var Total = 0;
 var averageChange;
 var monthly_difference;
 let sum = 0;
+var current_in = 0;
+var current_de = 0;
+
 
 for (i = 1; i < finances.length; i++) {
-        sum += finances[i][1];
-        monthly_difference = finances[i][1]-finances[i-1][1];
-        Total += monthly_difference;
-        
+    monthly_difference = finances[i][1] - finances[i - 1][1];
+    Total += monthly_difference;
+
+    if (monthly_difference > current_in) {
+        current_in = monthly_difference;
+        var month_in = finances[i][0];
+    }
+    if (monthly_difference < current_de) {
+        current_de = monthly_difference;
+        var month_de = finances[i][0];
+    }
+
+
+
 }
 
-console.log('Finacial Analysis')
-console.log('-----------------------')
-console.log('Total Months: ', finances.length)
-console.log('Total: $', finances.reduce((acc, current) => acc + current[1],0));
-console.log('Average Change: ', (Total/(finances.length-1)).toFixed(2));
+console.log('Financial Analysis')
+console.log('---------------')
+console.log('Total Months: '+ finances.length)
+console.log('Total: $' + finances.reduce((acc, current) => acc + current[1], 0));
+console.log('Average Change: '+(Total / (finances.length - 1)).toFixed(2));
+console.log('Greatest Increase in Profits/Losses: ', month_in, '($'+current_in+ ')')
+console.log('Greatest Decrease in Profits/Losses: ', month_de, '($'+current_de+ ')')
 
 
-        
 
-
-    
