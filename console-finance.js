@@ -87,27 +87,35 @@ var finances = [
     ['Feb-2017', 671099],
 ];
 
-
+// Initaiting variables 
 var Total = 0;
 var monthly_difference;
 var current_in = 0;
 var current_de = 0;
 
-
+// Loop over finances array 
 for (i = 1; i < finances.length; i++) {
+    // Find the monthly difference in revenue between the current month 
+    // and previous month, store the total difference between each month in Total variable
     monthly_difference = finances[i][1] - finances[i - 1][1];
     Total += monthly_difference;
 
+    // If monthly difference is more than the current, 
+    // re-assign current as the current monthly difference
     if (monthly_difference > current_in) {
         current_in = monthly_difference;
+        // Store current month and year of the iteration
         var month_in = finances[i][0];
     }
+    // If monthly difference is less than the current, 
+    // re-assign current as the current monthly difference
     if (monthly_difference < current_de) {
         current_de = monthly_difference;
         var month_de = finances[i][0];
     }
 }
 
+// Print task answers to the console
 console.log('Financial Analysis')
 console.log('---------------')
 console.log('Total Months: ' + finances.length)
